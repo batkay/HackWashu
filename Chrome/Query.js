@@ -54,8 +54,8 @@
 // }
 
 function getCurrencies() {
-  // var value = document.getElementById("amount").innerHTML;
-  console.log("100");
+  let value = document.getElementById("amount").value;
+  console.log(value);
   // console.log(value);
   //  const data ={
   //     "transactionId": "ee421c25-f928-4bf6-b884-3600b76b860d",
@@ -64,7 +64,7 @@ function getCurrencies() {
   //       "value": 100,
   //       "currencyCode": "USD"
   //     }}
-  data = {"money": 100}
+  data = {"money": value}
   fetch("http://localhost:8080", {
     method: "POST",
     body: JSON.stringify(data),
@@ -72,10 +72,13 @@ function getCurrencies() {
       "content-type": "application/json",
     },
   })
-    .then((res) => res.text())
-    .then((text) => {
+    // .then((res) => res.text())
+
+    .then((res) => res.json())
+    .then((jsonic) => {
+      text = jsonic.transactionFootprints[0].carbonEmissionInOunces;
       console.log(text, value);
-      document.getElementById("impact").body = text;
+      document.getElementById("impact").innerHTML = text;
     })
     .catch((err) => console.log(err));
 }
