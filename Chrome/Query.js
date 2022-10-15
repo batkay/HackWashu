@@ -54,7 +54,9 @@
 // }
 
 function getCurrencies() {
-  // var value = document.getElementById("amount").innerHTML;
+  
+  var value = document.getElementById("amount").innerHTML;
+  console.log(value)
   console.log("100");
   // console.log(value);
   //  const data ={
