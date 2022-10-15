@@ -55,9 +55,9 @@
 // }
 
 function getCurrencies() {
-    // var value = document.getElementById("amount").innerHTML;
+    var value = document.getElementById("amount").innerHTML;
     console.log("100");
-    // console.log(value);
+    console.log(value);
 //  const data ={
 //     "transactionId": "ee421c25-f928-4bf6-b884-3600b76b860d",
 //     "mcc": 3997,
@@ -80,4 +80,4 @@ function getCurrencies() {
 //     .catch((err) => console.log(err));
 }
 
-document.getElementById("submit").addEventListener("click", getCurrencies, false);
+document.getElementById("submit").addEventListener("click", getCurrencies);
