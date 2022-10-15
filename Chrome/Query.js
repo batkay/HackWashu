@@ -54,9 +54,8 @@
 // }
 
 function getCurrencies() {
-  
   let value = document.getElementById("amount").innerHTML;
-  console.log(value)
+  console.log("100");
   // console.log(value);
   //  const data ={
   //     "transactionId": "ee421c25-f928-4bf6-b884-3600b76b860d",
