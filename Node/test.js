@@ -1,3 +1,4 @@
+
 var http = require('http');
 
 function getCurrencies() {
@@ -27,10 +28,8 @@ function getCurrencies() {
       consumerKey,
       signingKey
     );
-
-
-
     
+
     fetch("https://sandbox.api.mastercard.com/doconomy/supported-currencies", {
       method: "GET",
       headers: {
@@ -45,6 +44,8 @@ function getCurrencies() {
       })
       .catch((err) => console.log(err));
   }
+
+document.getElementById("submit").addEventListener("click", getCurrencies, false);
 
 http.createServer(function (req, res) {
 
