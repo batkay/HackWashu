@@ -75,12 +75,12 @@ function getCurrencies() {
     .catch((err) => console.log(err));
 }
 
-function getFootprint(spending, res) {
+function getFootprint(spending, mcc, res) {
   let test = {
     transactions: [
       {
         transactionId: "ee421c25-f928-4bf6-b884-3600b76b860d",
-        mcc: 3997,
+        mcc: mcc,
         amount: { value: spending, currencyCode: "USD" },
       },
     ],
@@ -164,7 +164,8 @@ http
       req.on("end", () => {
         postData = JSON.parse(whole);
         console.log(postData["money"]);
-        getFootprint( parseFloat(postData["money"]), res);
+
+        getFootprint( parseFloat(postData["money"]), postData["mcc"], res);
       });
 
       // req.on('end', () => {

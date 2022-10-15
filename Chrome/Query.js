@@ -5,7 +5,7 @@ function updateScore() {
   console.log(value);
 
 
-  data = {"money": value}
+  data = {"money": value, "mcc": mcc};
   fetch("http://localhost:8080", {
     method: "POST",
     body: JSON.stringify(data),
