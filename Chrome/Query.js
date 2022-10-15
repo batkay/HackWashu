@@ -54,15 +54,15 @@
 // }
 
 function getCurrencies() {
+
+  
   let value = document.getElementById("amount").value;
-  // console.log(value);
-  //  const data ={
-  //     "transactionId": "ee421c25-f928-4bf6-b884-3600b76b860d",
-  //     "mcc": 3997,
-  //     "amount": {
-  //       "value": 100,
-  //       "currencyCode": "USD"
-  //     }}
+  let mcc = document.querySelector('input[name = mcc]:checked').value;
+  console.log("mcc:"+mcc);  
+  console.log(value);
+  console.log("100");
+
+
   data = {"money": value}
   fetch("http://localhost:8080", {
     method: "POST",
