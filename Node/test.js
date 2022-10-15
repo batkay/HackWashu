@@ -27,6 +27,10 @@ function getCurrencies() {
       consumerKey,
       signingKey
     );
+
+
+
+    
     fetch("https://sandbox.api.mastercard.com/doconomy/supported-currencies", {
       method: "GET",
       headers: {
