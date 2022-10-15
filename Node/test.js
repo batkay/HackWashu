@@ -133,6 +133,7 @@ function getFootprint(spending, res) {
   })
     .then((response) => response.text())
     .then(text => {
+      console.log("request");
       res.end(text);
     })
     .catch((err) => console.log(err));
@@ -140,6 +141,11 @@ function getFootprint(spending, res) {
 
 http
   .createServer(function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Request-Method', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+
     res.writeHead(200, { "Content-Type": "application/json" });
     // getCurrencies();
     getFootprint(100, res);

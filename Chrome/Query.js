@@ -1,4 +1,3 @@
-
 // function getFootprint() {
 //   let test = {
 //     transactions: {
@@ -55,29 +54,32 @@
 // }
 
 function getCurrencies() {
-    // var value = document.getElementById("amount").innerHTML;
-    console.log("100");
-    // console.log(value);
-//  const data ={
-//     "transactionId": "ee421c25-f928-4bf6-b884-3600b76b860d",
-//     "mcc": 3997,
-//     "amount": {
-//       "value": 100,
-//       "currencyCode": "USD"
-//     }}
-//  fetch("localhost:8080", {
-//     method: "POST",
-//     body: JSON.stringify(data),
-//     headers:{
-//       "content-type": "application/json",
-//       "Access-Control-Allow-Origin": "*",
-//     }
-//   })
-//     .then((res) => res.text())
-//     .then((text) => {
-//       console.log(text,value);
-//     })
-//     .catch((err) => console.log(err));
+  // var value = document.getElementById("amount").innerHTML;
+  console.log("100");
+  // console.log(value);
+  //  const data ={
+  //     "transactionId": "ee421c25-f928-4bf6-b884-3600b76b860d",
+  //     "mcc": 3997,
+  //     "amount": {
+  //       "value": 100,
+  //       "currencyCode": "USD"
+  //     }}
+  data = {"money": 100}
+  fetch("http://localhost:8080", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "content-type": "application/json",
+    },
+  })
+    .then((res) => res.text())
+    .then((text) => {
+      console.log(text, value);
+      document.getElementById("impact").body = text;
+    })
+    .catch((err) => console.log(err));
 }
 
-document.getElementById("submit").addEventListener("click", getCurrencies, false);
+document
+  .getElementById("submit")
+  .addEventListener("click", getCurrencies, false);
