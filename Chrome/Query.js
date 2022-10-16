@@ -1,4 +1,5 @@
 let total = 0;
+let sadness = 0;
 
 chrome.storage.sync.get(["totalSaved"], function (result) {
   if (result != null && result.totalSaved != undefined) {
@@ -8,6 +9,23 @@ chrome.storage.sync.get(["totalSaved"], function (result) {
     updateImage();
   }
 });
+chrome.storage.sync.get(["sad"], function (result) {
+  if (result != null && result.sad != undefined) {
+    console.log("Value currently is " + result.sad);
+    sadness = result.sad;
+    updateImage();
+  }
+});
+
+function updateSadness (subtract) {
+  sadness -= subtract;
+  if (sadness < 0) {
+    sadness = 0;
+  }
+  chrome.storage.sync.set({ sad: sadness }, function () {
+    console.log("Value is set to " + sadness);
+  });
+}
 
 function updateImage(click = false) {
   if (click) {
@@ -15,14 +33,14 @@ function updateImage(click = false) {
     return;
   }
   //change image according to value
-  if (total > 1000) {
+  if (sadness > 1000) {
 
-    document.getElementById("anime").src = "images/main_cactus.gif";
-  } else if (total > 750) {
-    document.getElementById("anime").src = "images/main_cactus.gif";
-  } else if (total > 500) {
-    document.getElementById("anime").src = "images/main_cactus.gif";
-  } else if (total > 250) {
+    document.getElementById("anime").src = "images/dead_cactus.gif";
+  } else if (sadness > 750) {
+    document.getElementById("anime").src = "images/verysick_cactus.gif";
+  } else if (sadness > 500) {
+    document.getElementById("anime").src = "images/sick_cactus.gif";
+  } else if (sadness > 250) {
     document.getElementById("anime").src = "images/main_cactus.gif";
   } else {
     document.getElementById("anime").src = "images/main_cactus.gif";
@@ -31,6 +49,8 @@ function updateImage(click = false) {
 
 function drag(event) {
   updateImage(true);
+  updateSadness(1);
+  event.preventDefault();
   console.log(event.clientX);
   if (event.clientX != 0) {
     document.getElementById("anime").style.left = event.clientX - 50;
@@ -39,6 +59,10 @@ function drag(event) {
     document.getElementById("anime").style.top = event.clientY - 50;
   }
 
+}
+function dragDrop (event) {
+  updateImage();
+  
 }
 
 function previewScore() {
@@ -55,21 +79,9 @@ function previewScore() {
   })
     .then((res) => res.json())
     .then((jsonic) => {
-      console.log(total);
       text = parseFloat(jsonic.transactionFootprints[0].carbonEmissionInOunces);
-    //  total += text;
-
       console.log(text);
-    //  console.log(total);
-
       document.getElementById("impact").innerHTML = text;
-
-    //  document.getElementById("total").innerHTML = total;
-
-    //  chrome.storage.sync.set({ totalSaved: total }, function () {
-    //    console.log("Value is set to " + total);
-    //  });
-    //  updateImage();
     })
     .catch((err) => console.log(err));
 }
@@ -102,6 +114,7 @@ function updateScore() {
       chrome.storage.sync.set({ totalSaved: total }, function () {
         console.log("Value is set to " + total);
       });
+      updateSadness(-text);
       updateImage();
     })
     .catch((err) => console.log(err));
@@ -115,8 +128,12 @@ function resetScore() {
     console.log("Value is set to " + total);
   });
   updateImage();
+  updateSadness(sadness);
 }
 
 document.getElementById("submit").addEventListener("click", updateScore, false);
 document.getElementById("reset").addEventListener("click", resetScore, false);
 document.getElementById("anime").addEventListener("drag", drag, false);
+document.getElementById("anime").addEventListener("dragend", dragDrop, false);
+document.getElementById("preview").addEventListener("click", previewScore, false);
+document.getElementById("link").addEventListener("click", updateSadness(500), false);
