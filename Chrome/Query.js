@@ -11,20 +11,20 @@ chrome.storage.sync.get(["totalSaved"], function (result) {
 
 function updateImage(click = false) {
   if (click) {
-    document.getElementById("anime").src = "main_character.gif";
+    document.getElementById("anime").src = "images/main_cactus.gif";
     return;
   }
   //change image according to value
   if (total > 1000) {
-    document.getElementById("anime").src = "main_character.gif";
+    document.getElementById("anime").src = "images/main_cactus.gif";
   } else if (total > 750) {
-    document.getElementById("anime").src = "main_character.gif";
+    document.getElementById("anime").src = "images/main_cactus.gif";
   } else if (total > 500) {
-    document.getElementById("anime").src = "main_character.gif";
+    document.getElementById("anime").src = "images/main_cactus.gif";
   } else if (total > 250) {
-    document.getElementById("anime").src = "main_character.gif";
+    document.getElementById("anime").src = "images/main_cactus.gif";
   } else {
-    document.getElementById("anime").src = "main_character.gif";
+    document.getElementById("anime").src = "images/main_cactus.gif";
   }
 }
 
