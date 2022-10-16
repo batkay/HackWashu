@@ -3,6 +3,9 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <h1 class = "font" style="font-size:large">
+      Cactus
+    </h1>
     <div class="frame">
       <img
         src="images/main_cactus.gif"
@@ -11,34 +14,37 @@
         id="anime"
       />
     </div>
-    <a href="https://www.carbonfootprint.com/" target="_blank" id="link">
+    <label class = "font">Ways to make cactus happy:</label><br />
+    <a class = "font_body" href="https://www.carbonfootprint.com/" target="_blank" id="link">
       Learn to Reduce Carbon Footprint</a
     >
 
-    <div>Total:</div>
-    <div id="total"></div>
+    
+    <div class = "font">Total Carbon Emitted:</div>
+    <div class = "font_body" id="total" ></div>
+    <label class = "font">Type of purchase:</label><br />
     <form>
       <input type="radio" id="3000" name="mcc" value="3000" />
-      <label for="3000">United Airlines</label><br />
+      <label for="3000" class = "font_body">United Airlines</label><br />
       <input type="radio" id="3353" name="mcc" value="3353" />
-      <label for="3353">Brooks Rent-A-Car</label><br />
+      <label for="3353" class = "font_body">Brooks Rent-A-Car</label><br />
       <input type="radio" id="5661" name="mcc" value="5661" />
-      <label for="5661">Shoe Stores</label><br />
+      <label for="5661" class = "font_body">Shoe Stores</label><br />
       <input type="radio" id="5812" name="mcc" value="5812" />
-      <label for="5812">Eating Places, Restaurants</label><br />
+      <label for="5812" class = "font_body">Eating Places, Restaurants</label><br />
       <input type="radio" id="5045" name="mcc" value="5045" />
-      <label for="5045">Computers, Software</label><br />
+      <label for="5045" class = "font_body">Computers, Software</label><br />
 
-      <label>How much are you spending</label>
-      <input type="number" id="amount" name="amount" value="" /><br />
-      <input type="button" id="submit" value="Submit" />
-      <input type="button" id="reset" value="Reset?" />
-      <input type="button" id="preview" value="Preview?" />
+      <label class = "font">How much are you spending?</label>
+      <input class = "font_body" type="number" id="amount" name="amount" value="" /><br />
+      <input class = "font_body" type="button" id="submit" value="Submit" />
+      <input class = "font_body" type="button" id="reset" value="Reset?" />
+      <input class = "font_body" type="button" id="preview" value="Preview?" />
 
 
-      <label>Your carbon emission</label><br />
+      <label class = "font">Your carbon emission</label><br />
     </form>
-    <div id="impact"></div>
+    <div class = "font_body" id="impact"></div>
     <script src="Query.js"></script>
   </body>
 </html>
