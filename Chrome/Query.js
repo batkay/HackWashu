@@ -1,5 +1,7 @@
 let total = 0;
 let sadness = 0;
+// let can = false;
+
 
 chrome.storage.sync.get(["totalSaved"], function (result) {
   if (result != null && result.totalSaved != undefined) {
@@ -64,6 +66,18 @@ function dragDrop (event) {
   updateImage();
   
 }
+
+
+
+// function switchCursor(event) {
+//   if(can){
+//     document.body.style.cursor = "images/watering_can.jpg";
+//   }
+//   else {
+//     document.body.style.cursor = "pointer";
+//   }
+
+// }
 
 function previewScore() {
   let value = document.getElementById("amount").value;
@@ -137,3 +151,4 @@ document.getElementById("anime").addEventListener("drag", drag, false);
 document.getElementById("anime").addEventListener("dragend", dragDrop, false);
 document.getElementById("preview").addEventListener("click", previewScore, false);
 document.getElementById("link").addEventListener("click", updateSadness(500), false);
+// document.getElementById("water").addEventListener("click", switchCursor, false);
