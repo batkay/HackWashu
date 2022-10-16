@@ -2,8 +2,7 @@ let total = 0;
 let sadness = 0;
 // let can = false;
 
-
-chrome.storage.sync.get(["totalSaved"], function (result) {
+chrome.storage.local.get(["totalSaved"], function (result) {
   if (result != null && result.totalSaved != undefined) {
     console.log("Value currently is " + result.totalSaved);
     total = result.totalSaved;
@@ -11,7 +10,7 @@ chrome.storage.sync.get(["totalSaved"], function (result) {
     updateImage();
   }
 });
-chrome.storage.sync.get(["sad"], function (result) {
+chrome.storage.local.get(["sad"], function (result) {
   if (result != null && result.sad != undefined) {
     console.log("Value currently is " + result.sad);
     sadness = result.sad;
@@ -19,14 +18,17 @@ chrome.storage.sync.get(["sad"], function (result) {
   }
 });
 
-function updateSadness (subtract) {
+function updateSadness(subtract, update = true) {
   sadness -= subtract;
   if (sadness < 0) {
     sadness = 0;
   }
-  chrome.storage.sync.set({ sad: sadness }, function () {
-    console.log("Value is set to " + sadness);
-  });
+  if (update) {
+    chrome.storage.local.set({ sad: sadness }, function () {
+      console.log("Value is set to " + sadness);
+    });
+  }
+  
 }
 
 function updateImage(click = false) {
@@ -36,7 +38,6 @@ function updateImage(click = false) {
   }
   //change image according to value
   if (sadness > 1000) {
-
     document.getElementById("anime").src = "images/dead_cactus.gif";
   } else if (sadness > 750) {
     document.getElementById("anime").src = "images/verysick_cactus.gif";
@@ -51,7 +52,7 @@ function updateImage(click = false) {
 
 function drag(event) {
   updateImage(true);
-  updateSadness(1);
+  updateSadness(1, false);
   event.preventDefault();
   console.log(event.clientX);
   if (event.clientX != 0) {
@@ -60,14 +61,11 @@ function drag(event) {
   if (event.clientY != 0) {
     document.getElementById("anime").style.top = event.clientY - 50;
   }
-
 }
-function dragDrop (event) {
+function dragDrop(event) {
+  updateSadness(0);
   updateImage();
-  
 }
-
-
 
 // function switchCursor(event) {
 //   if(can){
@@ -125,7 +123,7 @@ function updateScore() {
 
       document.getElementById("total").innerHTML = total;
 
-      chrome.storage.sync.set({ totalSaved: total }, function () {
+      chrome.storage.local.set({ totalSaved: total }, function () {
         console.log("Value is set to " + total);
       });
       updateSadness(-text);
@@ -138,17 +136,30 @@ function resetScore() {
   total = 0;
   document.getElementById("total").innerHTML = total;
 
-  chrome.storage.sync.set({ totalSaved: total }, function () {
+  chrome.storage.local.set({ totalSaved: total }, function () {
     console.log("Value is set to " + total);
   });
-  updateImage();
+  
   updateSadness(sadness);
+  updateImage();
 }
 
 document.getElementById("submit").addEventListener("click", updateScore, false);
 document.getElementById("reset").addEventListener("click", resetScore, false);
 document.getElementById("anime").addEventListener("drag", drag, false);
 document.getElementById("anime").addEventListener("dragend", dragDrop, false);
-document.getElementById("preview").addEventListener("click", previewScore, false);
-document.getElementById("link").addEventListener("click", updateSadness(500), false);
+document
+  .getElementById("preview")
+  .addEventListener("click", previewScore, false);
+document.getElementById("link").addEventListener(
+  "click",
+  (event) => {
+    event.preventDefault();
+    updateSadness(500);
+    updateImage();
+    setTimeout(()=>{}, 1000);
+    window.open("https://www.carbonfootprint.com/", "_blank");
+  },
+  false
+);
 // document.getElementById("water").addEventListener("click", switchCursor, false);
