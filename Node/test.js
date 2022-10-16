@@ -112,17 +112,6 @@ function getFootprint(spending, mcc, res) {
     signingKey
   );
 
-  // let test = {
-  //   transactions: {
-  //     transactionId: "ee421c25-f928-4bf6-b884-3600b76b860d",
-  //     mcc: "3997",
-  //     amount: {
-  //       value: spending,
-  //       currencyCode: "USD",
-  //     },
-  //   },
-  // };
-
   console.log(JSON.stringify(test));
 
   fetch("https://sandbox.api.mastercard.com/doconomy/transaction-footprints", {
@@ -167,37 +156,12 @@ http
 
         getFootprint( parseFloat(postData["money"]), postData["mcc"], res);
       });
-
-      // req.on('end', () => {
-      //     console.log(whole)
-      //     res.writeHead(200, 'OK', {'Content-Type': 'text/html'})
-      //     res.end('Data received.')
-      // })
     }
 
     else {
       res.end("{'Failed': true}");
     }    
-    // getFootprint(100, res);
-    // res.end("Hello World!");
+
   })
   .listen(8080);
 
-// app.use(express.json());
-
-// app.post("/", (req, res) => {
-
-//   res.writeHead(200, { "Content-Type": "application/json" });
-//   getFootprint(100, res);
-// });
-
-// app.listen(8080, (req, res) => {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   res.setHeader("Access-Control-Request-Method", "*");
-//   res.setHeader(
-//     "Access-Control-Allow-Methods",
-//     "OPTIONS, GET, POST, PUT, PATCH, DELETE"
-//   );
-//   res.setHeader("Access-Control-Allow-Headers", "*");
-//   // console.log("Server Running");
-// });
