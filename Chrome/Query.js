@@ -5,49 +5,29 @@ chrome.storage.sync.get(["totalSaved"], function (result) {
     console.log("Value currently is " + result.totalSaved);
     total = result.totalSaved;
     document.getElementById("total").innerHTML = total;
+    updateImage();
   }
 });
+
+function updateImage() {
+  //change image according to value
+  if (total > 1000) {
+    document.getElementById("anime").src = "";
+  } else if (total > 750) {
+    document.getElementById("anime").src = "";
+  } else if (total > 500) {
+    document.getElementById("anime").src = "";
+  } else if (total > 250) {
+    document.getElementById("anime").src = "";
+  } else {
+    document.getElementById("anime").src = "";
+  }
+}
 
 function updateScore() {
   let value = document.getElementById("amount").value;
   let mcc = document.querySelector("input[name = mcc]:checked").value;
 
-
-if(re==true){
-  document.getElementById("anime").src="main_character.gif";
-  total=0;
-}
-
-//change image according to value
-if(total>1000){
-  document.getElementById("anime").src="";
-}
-else if(total>750){
-  document.getElementById("anime").src="";
-}
-else if(total>500){
-  document.getElementById("anime").src="";
-}
-else if(total>250){
-  document.getElementById("anime").src="";
-}
-else{
-  document.getElementById("anime").src="";
-}
-
-
-function getCurrencies() {
-  // var value = document.getElementById("amount").innerHTML;
-  console.log("100");
-  // console.log(value);
-  //  const data ={
-  //     "transactionId": "ee421c25-f928-4bf6-b884-3600b76b860d",
-  //     "mcc": 3997,
-  //     "amount": {
-  //       "value": 100,
-  //       "currencyCode": "USD"
-  //     }}
-  data = {"money": 100}
   data = { money: value, mcc: mcc };
   fetch("http://localhost:8080", {
     method: "POST",
@@ -72,6 +52,7 @@ function getCurrencies() {
       chrome.storage.sync.set({ totalSaved: total }, function () {
         console.log("Value is set to " + total);
       });
+      updateImage();
     })
     .catch((err) => console.log(err));
 }
@@ -83,7 +64,8 @@ function resetScore() {
   chrome.storage.sync.set({ totalSaved: total }, function () {
     console.log("Value is set to " + total);
   });
+  updateImage();
 }
 
 document.getElementById("submit").addEventListener("click", updateScore, false);
-document.getElementById("reset").addEventListener("click", resetScore);
+document.getElementById("reset").addEventListener("click", resetScore, false);
