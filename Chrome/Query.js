@@ -52,6 +52,28 @@
 //     })
 //     .catch((err) => console.log(err));
 // }
+if(re==true){
+  document.getElementById("anime").src="main_character.gif";
+  total=0;
+}
+
+//change image according to value
+if(total>1000){
+  document.getElementById("anime").src="";
+}
+else if(total>750){
+  document.getElementById("anime").src="";
+}
+else if(total>500){
+  document.getElementById("anime").src="";
+}
+else if(total>250){
+  document.getElementById("anime").src="";
+}
+else{
+  document.getElementById("anime").src="";
+}
+
 
 function getCurrencies() {
   // var value = document.getElementById("amount").innerHTML;
