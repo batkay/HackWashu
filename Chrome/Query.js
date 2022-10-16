@@ -99,11 +99,11 @@ function updateScore() {
 
       document.getElementById("total").innerHTML = total;
 
-      chrome.storage.sync.set({ totalSaved: total }, function () {
-        console.log("Value is set to " + total);
-      });
+      chrome.storage.sync.set({totalSaved: total }, function () {
+        console.log("Value is set to " + total) });
       updateImage();
     })
+
     .catch((err) => console.log(err));
 }
 
@@ -114,7 +114,7 @@ function resetScore() {
   chrome.storage.sync.set({ totalSaved: total }, function () {
     console.log("Value is set to " + total);
   });
-  updateImage();
+  updateImage(true);
 }
 
 document.getElementById("submit").addEventListener("click", updateScore, false);

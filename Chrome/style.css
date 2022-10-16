@@ -13,3 +13,11 @@
     width: 100px;
     height: 150px;
 }
+
+body {
+  background-image: url('evening_pic.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
