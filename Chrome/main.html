@@ -1,19 +1,19 @@
 <html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+  </head>
   <body>
-
-    <img
-      src="main_cactus.gif"
-      alt="funny animation GIF"
-      width="150"
-      height="200"
-    />
-
-    <div>
-      Total: 
+    <div class = "frame">
+      <img
+        src="images/main_cactus.gif"
+        alt="funny animation GIF"
+        class = "picture"
+        id="anime"
+      />
     </div>
-    <div id = "total">
 
-    </div>
+    <div>Total:</div>
+    <div id="total"></div>
     <form>
       <input type="radio" id="3000" name="mcc" value="3000" />
       <label for="3000">United Airlines</label><br />
@@ -29,10 +29,9 @@
 
       <input type="number" id="amount" name="amount" value="" /><br />
       <input type="button" id="submit" value="Submit" />
-      <input type="submit" id = "submit" value="Reset?">
-      <input type="submit" id = "submit" value="Preview?">
+      <input type="button" id = "reset" value="Reset?">
+      <input type="button" id = "preview" value="Preview?">
 
-      <input type="button" id="reset" value="Reset?" />
     </form>
     <div id="impact"></div>
     <script src="Query.js"></script>
