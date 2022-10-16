@@ -75,12 +75,14 @@ function getCurrencies() {
     .catch((err) => console.log(err));
 }
 
-function getFootprint(spending, res) {
+function getFootprint(spending, mcc, res) {
   let test = {
-    "transactions" : [{
-      "transactionId": "ee421c25-f928-4bf6-b884-3600b76b860d",
-      "mcc": 3997,
-      "amount": { value: spending, currencyCode: "USD" },}
+    transactions: [
+      {
+        transactionId: "ee421c25-f928-4bf6-b884-3600b76b860d",
+        mcc: mcc,
+        amount: { value: spending, currencyCode: "USD" },
+      },
     ],
   };
   const forge = require("node-forge");
@@ -132,8 +134,7 @@ function getFootprint(spending, res) {
     },
   })
     .then((response) => response.text())
-    .then(text => {
-      console.log("request");
+    .then((text) => {
       res.end(text);
     })
     .catch((err) => console.log(err));
@@ -141,22 +142,62 @@ function getFootprint(spending, res) {
 
 http
   .createServer(function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Request-Method', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', '*');
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Request-Method", "*");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+    );
+    res.setHeader("Access-Control-Allow-Headers", "*");
 
     res.writeHead(200, { "Content-Type": "application/json" });
+
+    console.log("Recieving");
+
     // getCurrencies();
-    getFootprint(100, res);
+    if (req.method == "POST") {
+      console.log("request");
+      whole = "";
+      req.on("data", (chunk) => {
+        whole += chunk.toString();
+      });
+      req.on("end", () => {
+        postData = JSON.parse(whole);
+        console.log(postData["money"]);
+
+        getFootprint( parseFloat(postData["money"]), postData["mcc"], res);
+      });
+
+      // req.on('end', () => {
+      //     console.log(whole)
+      //     res.writeHead(200, 'OK', {'Content-Type': 'text/html'})
+      //     res.end('Data received.')
+      // })
+    }
+
+    else {
+      res.end("{'Failed': true}");
+    }    
+    // getFootprint(100, res);
     // res.end("Hello World!");
   })
   .listen(8080);
 
-// app.post("/giveFoot", (req, res) => {
+// app.use(express.json());
 
-// })
+// app.post("/", (req, res) => {
+
+//   res.writeHead(200, { "Content-Type": "application/json" });
+//   getFootprint(100, res);
+// });
 
 // app.listen(8080, (req, res) => {
-//   console.log("Server Running");
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader("Access-Control-Request-Method", "*");
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+//   );
+//   res.setHeader("Access-Control-Allow-Headers", "*");
+//   // console.log("Server Running");
 // });
