@@ -9,19 +9,35 @@ chrome.storage.sync.get(["totalSaved"], function (result) {
   }
 });
 
-function updateImage() {
+function updateImage(click = false) {
+  if (click) {
+    document.getElementById("anime").src = "main_character.gif";
+    return;
+  }
   //change image according to value
   if (total > 1000) {
-    document.getElementById("anime").src = "";
+    document.getElementById("anime").src = "main_character.gif";
   } else if (total > 750) {
-    document.getElementById("anime").src = "";
+    document.getElementById("anime").src = "main_character.gif";
   } else if (total > 500) {
-    document.getElementById("anime").src = "";
+    document.getElementById("anime").src = "main_character.gif";
   } else if (total > 250) {
-    document.getElementById("anime").src = "";
+    document.getElementById("anime").src = "main_character.gif";
   } else {
-    document.getElementById("anime").src = "";
+    document.getElementById("anime").src = "main_character.gif";
   }
+}
+
+function drag(event) {
+  updateImage(true);
+  console.log(event.clientX);
+  if (event.clientX != 0) {
+    document.getElementById("anime").style.left = event.clientX - 50;
+  }
+  if (event.clientY != 0) {
+    document.getElementById("anime").style.top = event.clientY - 50;
+  }
+
 }
 
 function updateScore() {
@@ -69,3 +85,4 @@ function resetScore() {
 
 document.getElementById("submit").addEventListener("click", updateScore, false);
 document.getElementById("reset").addEventListener("click", resetScore, false);
+document.getElementById("anime").addEventListener("drag", drag, false);
