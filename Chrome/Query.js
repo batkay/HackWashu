@@ -29,7 +29,7 @@ function updateSadness (subtract) {
 
 function updateImage(click = false) {
   if (click) {
-    document.getElementById("anime").src = "images/main_cactus.gif";
+    document.getElementById("anime").src = "images/drag_cactus.gif";
     return;
   }
   //change image according to value
@@ -43,7 +43,7 @@ function updateImage(click = false) {
   } else if (sadness > 250) {
     document.getElementById("anime").src = "images/main_cactus.gif";
   } else {
-    document.getElementById("anime").src = "images/main_cactus.gif";
+    document.getElementById("anime").src = "images/happy_cactus.gif";
   }
 }
 
